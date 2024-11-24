@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video.title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-top: 30px;
+        }
+        h2 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #c4302b;
+            text-align: center;
+            margin: 40px 0 20px;
+        }
+        .comments-section {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .comment-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .comment-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .comment-card:hover {
+            transform: scale(1.02);
+        }
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+        .comment-category {
+            font-size: 14px;
+            color: #777;
+            padding: 4px 8px;
+            background-color: #c4302b;
+            color: #fff;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        .ai-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4a4a4a;
+            padding: 3px 6px;
+            border-radius: 3px;
+            margin-left: 10px;
+            font-style: normal;
+        }
+        .comment-text {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #c4302b;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .comment-category.positive { color: green; }
+        .comment-category.negative { color: red; }
+        .comment-category.neutral { color: gray; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-video"></i> AI Analyzer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Anasayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'youtube_search' %}">Youtube Analiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'analyze' %}">Video Aramalarım</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger ms-2" href="{% url 'logout' %}">Çıkış Yap</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Video Title -->
+    <div class="container text-center">
+        <h1 id="videoTitle">{{ video.title }}</h1>
+    </div>
+
+    <!-- Comments Analysis Section -->
+    <h2 id="commentsHeader">Comments Analysis by AI</h2>
+
+    <div class="comments-section" id="commentsSection">
+        {% if comments %}
+            {% for comment in comments %}
+            <div class="comment-card">
+                <div class="comment-header">
+                    <img src="{{ comment.author_image_url }}" alt="Author Image" class="rounded-circle" style="width: 40px; height: 40px;">
+                    <div>
+                        <div class="comment-author">{{ comment.author }}</div>
+                        <div class="comment-category {{ comment.category|lower }}">
+                            {{ comment.category }}
+                            <span class="ai-label">AI classified</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="comment-text">{{ comment.text }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-info">Bu video için henüz yorum bulunmamaktadır.</div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Video Analyzer | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fade-in effect for title and header
+            const videoTitle = document.getElementById("videoTitle");
+            const commentsHeader = document.getElementById("commentsHeader");
+
+            videoTitle.style.opacity = 1;
+            setTimeout(() => commentsHeader.style.opacity = 1, 300);
+
+            // Scroll animation for comments
+            const commentCards = document.querySelectorAll(".comment-card");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            commentCards.forEach(card => observer.observe(card));
+        });
+    </script>
+</body>
+</html>

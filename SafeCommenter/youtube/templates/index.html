@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Comment Classifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 20px;
+            background-image: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .footer {
+            background-color: #283e51;
+            color: #ddd;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        .section-title {
+            margin: 50px 0 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        /* Renkli ikonlar için özelleştirilmiş renkler */
+        .icon-shield { color: #4CAF50; } /* Çevrimiçi Güvenlik */
+        .icon-brain { color: #FF9800; }  /* İçerik Kalitesi */
+        .icon-chart { color: #3F51B5; }  /* Veri Analizi */
+        .icon-handshake { color: #9C27B0; } /* Kullanıcı İlişkileri */
+        .icon-database { color: #009688; } /* Veri Tabanı */
+        .icon-ai { color: #FF5722; }      /* Yapay Zeka Modeli */
+        .icon-comments { color: #2196F3; } /* Yorum Analizi */
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-video"></i> AI Analyzer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Anasayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-3" href="{% url 'login' %}">Giriş Yap</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <h1>Youtube Yorum Sınıflandırma Projesi</h1>
+        <p>Yapay zeka modeli ile hakaret, cinsiyetçilik, ırkçılık gibi içerikleri belirleyin ve sağlıklı bir çevrimiçi ortam oluşturun.</p>
+    </section>
+
+    <div class="container mt-5">
+        <h2 class="section-title">Projenin Faydaları ve Çözdüğü Sorunlar</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card feature-card p-3">
+                    <h5><i class="fas fa-shield-alt icon-large icon-shield"></i> Çevrimiçi Güvenliği Sağlama</h5>
+                    <p>Proje, zararlı içerikleri tespit ederek platform yöneticilerine ve içerik oluşturucularına daha güvenli bir çevrimiçi ortam sunma fırsatı sağlar.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card feature-card p-3">
+                    <h5><i class="fas fa-brain icon-large icon-brain"></i> İçerik Kalitesini Artırma</h5>
+                    <p>Yorumları analiz ederek, değerli içerikleri öne çıkarmanıza ve olumsuz etkileri en aza indirmenize yardımcı olur. Böylece topluluk standartlarını yükseltebilirsiniz.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card feature-card p-3">
+                    <h5><i class="fas fa-chart-line icon-large icon-chart"></i> Veri Analizi ve İyileştirme</h5>
+                    <p>Kullanıcı yorumları hakkında derinlemesine analiz yaparak içerik stratejinizi geliştirebilir ve izleyici kitlenizin ihtiyaçlarını daha iyi anlayabilirsiniz.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card feature-card p-3">
+                    <h5><i class="fas fa-handshake icon-large icon-handshake"></i> Kullanıcı İlişkilerini Güçlendirme</h5>
+                    <p>Olumsuz içerikleri filtreleyerek izleyicilerle daha sağlıklı bir iletişim kurmanızı ve marka güvenilirliğinizi artırmanızı sağlar.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Proje Özellikleri</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card p-3">
+                    <i class="fas fa-database icon-large icon-database"></i>
+                    <h5>Veri Tabanı</h5>
+                    <p>Analizleri kaydedip tekrar çalıştırma özelliği ile kullanıcılar için pratik bir kullanım sunar.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card p-3">
+                    <i class="fas fa-robot icon-large icon-ai"></i>
+                    <h5>Yapay Zeka Modeli</h5>
+                    <p>Yapay zeka modeli, yorumları kategorilere ayırarak detaylı analiz yapmanıza olanak tanır.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card p-3">
+                    <i class="fas fa-comments icon-large icon-comments"></i>
+                    <h5>Yorum Analizi</h5>
+                    <p>YouTube API'sinden çekilen yorumları hızlıca sınıflandırın ve sonuçları görüntüleyin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="footer">
+        <p>&copy; 2024 Hasan Can Çelik | Tüm Hakları Saklıdır</p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
