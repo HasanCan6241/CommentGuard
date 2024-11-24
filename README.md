@@ -1,6 +1,6 @@
 # YouTube CommentGuard
 
-**YouTube CommentGuard** is a web-based application that automatically classifies YouTube comments into categories such as Neutral, Insult/Hate Speech, Sexism, and Racism. This project uses the **Hugging Face "nanelimon/bert-base-turkish-bullying"** model for Turkish text classification. It aims to enhance content moderation by identifying harmful comments and providing a cleaner, safer environment for users.
+**YouTube CommentGuard** is a web-based application that automatically classifies YouTube comments into categories such as Neutral, Insult/Hate Speech, Sexism, and Racism. This project uses the Hugging Face [Nane Limon bert-base-turkish-bullying model](https://huggingface.co/nanelimon/bert-base-turkish-bullying). It aims to enhance content moderation by identifying harmful comments and providing a cleaner, safer environment for users.
 
 <img src="https://cdn.prod.website-files.com/623952e7f678f72edd96fd42/64af90e5414541a57da1edc0_How%20NLP%20is%20being%20used%20to%20keep%20Youtube%20comments%20safe.svg" alt="Anasayfa" width="900" height="450"/>
 
@@ -52,8 +52,22 @@ Please follow the guidelines below when contributing:
 
 ### Steps
 
-1. **Clone the repository:**
+## 📦 Setup & Installation
 
-   ```bash
-   git clone https://github.com/HasanCan6241/YouTube-CommentGuard.git
-   cd YouTube-CommentGuard
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/HasanCan6241/CommentGuard.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd CommentGuard
+    ```
+3. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. Run the Django server:
+    ```bash
+    python manage.py runserver
+    ```
+
