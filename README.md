@@ -2,7 +2,7 @@
 
 **YouTube CommentGuard** is a web-based application that automatically classifies YouTube comments into categories such as Neutral, Insult/Hate Speech, Sexism, and Racism. This project uses the **Hugging Face "nanelimon/bert-base-turkish-bullying"** model for Turkish text classification. It aims to enhance content moderation by identifying harmful comments and providing a cleaner, safer environment for users.
 
-![Project Banner](https://cdn.prod.website-files.com/623952e7f678f72edd96fd42/64af90e5414541a57da1edc0_How%20NLP%20is%20being%20used%20to%20keep%20Youtube%20comments%20safe.svg) <!-- You can replace this with your actual banner image path -->
+<img src="https://cdn.prod.website-files.com/623952e7f678f72edd96fd42/64af90e5414541a57da1edc0_How%20NLP%20is%20being%20used%20to%20keep%20Youtube%20comments%20safe.svg" alt="Anasayfa" width="850" height="450"/>
 
 ## Features
 
